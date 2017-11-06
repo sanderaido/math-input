@@ -98,8 +98,8 @@ class MathWrapper {
         this.mathField = this.MQ.MathField(element, {
             // use a span instead of a textarea so that we don't bring up the
             // native keyboard on mobile when selecting the input
-            substituteTextarea: function() {
-                return document.createElement('span');
+            substituteTextarea: () => {
+                return this.fakeTextarea = document.createElement('span');
             },
         });
         this.callbacks = callbacks;
@@ -163,14 +163,14 @@ class MathWrapper {
             this.mathField.write('\\sqrt[3]{}');
             this.mathField.keystroke('Left'); // under the root
         } else if (key === Keys.EXP || key === Keys.EXP_2 ||
-                key === Keys.EXP_3) {
+            key === Keys.EXP_3) {
             this._handleExponent(cursor, key);
         } else if (key === Keys.JUMP_OUT_PARENTHESES ||
-                key === Keys.JUMP_OUT_EXPONENT ||
-                key === Keys.JUMP_OUT_BASE ||
-                key === Keys.JUMP_INTO_NUMERATOR ||
-                key === Keys.JUMP_OUT_NUMERATOR ||
-                key === Keys.JUMP_OUT_DENOMINATOR) {
+            key === Keys.JUMP_OUT_EXPONENT ||
+            key === Keys.JUMP_OUT_BASE ||
+            key === Keys.JUMP_INTO_NUMERATOR ||
+            key === Keys.JUMP_OUT_NUMERATOR ||
+            key === Keys.JUMP_OUT_DENOMINATOR) {
             this._handleJumpOut(cursor, key);
         } else if (key === Keys.BACKSPACE) {
             this._handleBackspace(cursor);
@@ -421,7 +421,7 @@ class MathWrapper {
                 this._handleBackspaceInLogIndex(cursor);
 
             } else if (leftNode.ctrlSeq === '\\ge ' ||
-                    leftNode.ctrlSeq === '\\le ') {
+                leftNode.ctrlSeq === '\\le ') {
                 this._handleBackspaceAfterLigaturedSymbol(cursor);
 
             } else if (this._isNthRoot(grandparent) && leftNode === MQ_END) {
@@ -485,7 +485,7 @@ class MathWrapper {
 
         const precedingNode = cursor[this.MQ.L];
         const shouldPrefixWithParens = precedingNode === MQ_END ||
-                invalidPrefixes.includes(precedingNode.ctrlSeq.trim());
+            invalidPrefixes.includes(precedingNode.ctrlSeq.trim());
         if (shouldPrefixWithParens) {
             this.mathField.write('\\left(\\right)');
         }
