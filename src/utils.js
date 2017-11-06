@@ -5,12 +5,14 @@ const {DecimalSeparators} = require('./consts');
 // provides, however -- the things in `icu-slim.js` (there's a copy in ../lib/
 // for reference).
 let decimalSeparator;
+/*
 if (typeof window !== 'undefined' && window.icu &&
         window.icu.getDecimalFormatSymbols().decimal_separator === ',') {
     decimalSeparator = DecimalSeparators.COMMA;
 } else {
     decimalSeparator = DecimalSeparators.PERIOD;
-}
+}*/
+decimalSeparator = DecimalSeparators.COMMA;
 
 module.exports = {
     decimalSeparator,
