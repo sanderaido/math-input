@@ -7,6 +7,7 @@ const {StyleSheet} = require("aphrodite");
 const {View} = require('../../fake-react-native-web');
 const CursorHandle = require('./cursor-handle');
 const MathWrapper = require('./math-wrapper');
+const CheckMathButton = require('./checkButton.js');
 const scrollIntoView = require('./scroll-into-view');
 const DragListener = require('./drag-listener');
 const {
@@ -23,6 +24,9 @@ const rectContainsXY = (bounds, x, y) => {
     return (bounds.left <= x && bounds.right >= x &&
     bounds.top <= y && bounds.bottom >= y);
 };
+
+// TODO selline globaalne muutuja on loll idee, aga kiireks testiks sobis
+var that;
 
 const MathInput = React.createClass({
     propTypes: {
@@ -76,6 +80,8 @@ const MathInput = React.createClass({
                 this.props.keypadElement.setCursor(cursor);
             },
         });
+
+        that = this;
 
         // NOTE(charlie): MathQuill binds this handler to manage its
         // drag-to-select behavior. For reasons that I can't explain, the event
@@ -807,6 +813,7 @@ const MathInput = React.createClass({
                     style={innerStyle}
                 />
             </div>
+            <CheckMathButton data={that} />
             {focused && handle.visible && <CursorHandle
                 {...handle}
                 onTouchStart={this.onCursorHandleTouchStart}

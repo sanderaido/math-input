@@ -15,7 +15,13 @@
 </head>
 <body>
 
+<script>
+    window.answer1 = '';
+</script>
+
+<p>Ava sulud: $$\left(x-y\right)^2$$</p>
 <div id="root"></div>
+<p id="vastus" style="display: none;">ÕIGE VASTUS!</p>
 
 <script src="lib/i18n.js"></script>
 <script src="lib/icu-slim.js"></script>
@@ -25,6 +31,17 @@
 <script src="node_modules/babel-polyfill/browser.js"></script>
 <script src="build/deps.js"></script>
 <script src="build/app.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [
+                ['$$','$$']
+            ],
+            displayMath: [ ['$$$','$$$'] ]
+        }
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML'></script>
 
 </body>
 </html>
